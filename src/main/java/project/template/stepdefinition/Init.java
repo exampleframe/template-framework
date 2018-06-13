@@ -1,7 +1,8 @@
-package project.template.init;
+package project.template.stepdefinition;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import io.github.bonigarcia.wdm.ChromeDriverManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,9 +18,8 @@ final public class  Init {
 
     @Before
     public void start(){
-        WebDriverManager.chromedriver().setup();
+        ChromeDriverManager.getInstance().setup();
         driver = new ChromeDriver();
-
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);

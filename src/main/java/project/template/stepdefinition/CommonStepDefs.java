@@ -8,20 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class CommonStepDefs {
-    WebDriver driver;
-
-    @Before
-    public void start(){
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-    }
-
-    @After
-    public void teardown() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
 
 
     @Когда("^пользователь переходит на страницу авторизации$")
