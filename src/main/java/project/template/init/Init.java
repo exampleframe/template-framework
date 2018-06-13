@@ -6,6 +6,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.concurrent.TimeUnit;
+
 final public class  Init {
     private static WebDriver driver;
 
@@ -17,7 +19,11 @@ final public class  Init {
     public void start(){
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        
+
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
     }
 
     @After
