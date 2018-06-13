@@ -11,10 +11,6 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 final public class  Init {
     private static WebDriver driver;
 
-    public static WebDriver getDriver() {
-        return driver;
-    }
-
     @Before
     public void start(){
         Configuration.browser = "chrome";
