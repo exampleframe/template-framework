@@ -1,4 +1,4 @@
-package project.template.stepdefinition;
+package project.template.utils;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -42,4 +42,7 @@ final public class  Init {
         props.stringPropertyNames().stream().forEach(key -> System.setProperty(key, props.getProperty(key)));
     }
 
+    public static WebDriver getDriver() {
+        return driver;
+    }
 }
