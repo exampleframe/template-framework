@@ -1,9 +1,7 @@
 package project.template.elements;
 
 import com.codeborne.selenide.SelenideElement;
-import project.template.factories.Elements;
 
-@Elements
 public abstract class AbstractElement {
 
 public final SelenideElement element;
