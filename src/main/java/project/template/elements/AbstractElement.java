@@ -1,15 +1,21 @@
 package project.template.elements;
 
 import com.codeborne.selenide.SelenideElement;
+import project.template.factories.Elements;
 
+@Elements
 public abstract class AbstractElement {
 
-private final SelenideElement element;
+public final SelenideElement element;
 private final String name;
 
-    public AbstractElement(SelenideElement element, String name) {
+    AbstractElement(SelenideElement element, String name) {
         this.element = element;
         this.name = name;
+    }
+
+    public Boolean isDisplayed() {
+        return element.isDisplayed();
     }
 
     public void click(){
@@ -20,7 +26,11 @@ private final String name;
         return element.innerText();
     }
 
-    public void setValue(){
+    public void setValue(String value){
         System.out.println("Должен быть переопределен");
+    }
+
+    public String getText(){
+        return element.innerText();
     }
 }

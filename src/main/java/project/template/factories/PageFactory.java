@@ -2,11 +2,10 @@ package project.template.factories;
 
 import org.reflections.Reflections;
 import project.template.pages.AbstractPage;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class PageFactory {
+public final class PageFactory {
     private static AbstractPage currentPage;
     private static final Map<String, Class<? extends AbstractPage>> PAGES_CACHE = new HashMap<>();
 
@@ -15,7 +14,6 @@ public class PageFactory {
         for (Class<? extends AbstractPage> clazz : reflections.getSubTypesOf(AbstractPage.class)) {
             PageEntry entry = clazz.getAnnotation(PageEntry.class);
             if (entry == null) {
-//                LOG.error("Страница [" + clazz + "] не содержит аннотации @PageEntry. Данная страница будет недоступна при поиске.");
                 continue;
             }
             PAGES_CACHE.put(entry.title(), clazz);
@@ -28,7 +26,6 @@ public class PageFactory {
         return page;
     }
 
-    //todo Добавить проверку дублирования названий полей
     public AbstractPage getPage(String name) {
         return get(name);
     }
