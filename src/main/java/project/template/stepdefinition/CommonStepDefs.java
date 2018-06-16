@@ -1,20 +1,22 @@
 package project.template.stepdefinition;
 
-import com.codeborne.selenide.SelenideElement;
-import cucumber.api.PendingException;
+import cucumber.api.DataTable;
 import cucumber.api.java.ru.И;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import project.template.elements.AbstractElement;
-import project.template.elements.CompositeElement;
 import project.template.pages.AbstractPage;
 import project.template.utils.Init;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+
+import static project.template.utils.Evaluator.*;
 
 
 public class CommonStepDefs {
-
+    private static final Logger LOG = LoggerFactory.getLogger(CommonStepDefs.class);
     private AbstractPage getCurrentPage() {
         return Init.getPageFactory().getCurrentPage();
     }
@@ -56,11 +58,20 @@ public class CommonStepDefs {
     @И("^пользователь нажимает кнопку \"([^\"]*)\" у элемента коллекции \"([^\"]*)\", содержащего \"([^\"]*)\"$")
     public void пользовательНажимаетКнопкуУЭлементаКоллекцииСодержащего(String subElName, String collectionName, String findedText) {
         List<AbstractElement> result = getCurrentPage().getCollection(collectionName);
-        AbstractElement element = getCurrentPage().getElement(subElName, getElByContainsText(findedText,result));
+        AbstractElement element = getCurrentPage().getElement(subElName, getElByContainsText(getVariable(findedText),result));
         element.click();
     }
 
     private AbstractElement getElByContainsText(String text,List<AbstractElement> list){
         return list.stream().filter(e->e.getText().contains(text)).findFirst().get();
+    }
+
+    @И("^пользователь устанавливает переменную$")
+    public void пользовательУстанавливаетПеременную(DataTable dataTable) {
+        LOG.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        Map<String,String> map = dataTable.asMap(String.class,String.class);
+        for(String key:map.keySet()){
+            setVariable(key,map.get(key));
+        }
     }
 }
