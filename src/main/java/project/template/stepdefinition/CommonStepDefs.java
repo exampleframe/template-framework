@@ -16,7 +16,7 @@ import static project.template.utils.Evaluator.*;
 
 
 public class CommonStepDefs {
-    private static final Logger LOG = LoggerFactory.getLogger(CommonStepDefs.class);
+    private static final Logger logger = LoggerFactory.getLogger(CommonStepDefs.class);
     private AbstractPage getCurrentPage() {
         return Init.getPageFactory().getCurrentPage();
     }
@@ -68,7 +68,7 @@ public class CommonStepDefs {
 
     @И("^пользователь устанавливает переменную$")
     public void пользовательУстанавливаетПеременную(DataTable dataTable) {
-        LOG.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        logger.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         Map<String,String> map = dataTable.asMap(String.class,String.class);
         for(String key:map.keySet()){
             setVariable(key,map.get(key));
